@@ -4,6 +4,8 @@ import React,{useState} from 'react';
 const Nweet = ({nweetObj, isOwner}) =>{
     const [editing,setEditing] = useState(false);
     const [editNweet,setEditNweet] = useState(nweetObj.text);
+
+    //delete
     const onDeleteClick = async () => {
         const ok = window.confirm("삭제하시겠습니까?");
         if(ok){
@@ -11,6 +13,7 @@ const Nweet = ({nweetObj, isOwner}) =>{
             await storageService.refFromURL(nweetObj.attachmentUrl).delete();
         }
     }
+    //update
     const toggleEditing = () => setEditing(prev => !prev);
     const onSubmit = async (e) => {
         e.preventDefault();

@@ -5,6 +5,7 @@ import Nweet from 'components/Nweet';
 
 const Home = ({userObj}) =>{
     const [nweet,setNweet] = useState("");
+    //nweets는 모든 nweet들
     const [nweets,setNweets] = useState([]);
     const [attachment,setAttachment] = useState("");
     
@@ -21,6 +22,7 @@ const Home = ({userObj}) =>{
     //     });
     // }
 
+    //read
     useEffect(()=>{
         // getNweets();
         
@@ -34,6 +36,7 @@ const Home = ({userObj}) =>{
         })
     },[])
 
+    //create
     const onSubmit = async (e) =>{
         e.preventDefault();
         let attachmentUrl="";
@@ -52,6 +55,7 @@ const Home = ({userObj}) =>{
         setNweet('');
         setAttachment('');
     }
+
     const onChange = (e) => {
         const {target : {value} }= e;
         setNweet(value);

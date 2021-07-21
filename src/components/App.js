@@ -11,20 +11,39 @@ function App() {
   // firebase를 기다려주어 로그인 되었다는 사실 알아차릴 수 있음
   useEffect(()=>{
     authService.onAuthStateChanged((user)=> {
+      // console.log(user);
       if(user){
         setIsLoggedIn(true);
-        setUserObj(user);
+        setUserObj({
+          // user에 있는 정보 필요한 것만 가져오도록 만들어줌
+          displayName: user.displayName,
+          uid : user.uid,
+          photoURL : user.photoURL,
+          updateProfile : (args) => user.updateProfile(args),
+        });
       }else{
         setIsLoggedIn(false);
+        setUserObj(null);
       }
       //init이 false라면 router를 숨길 것이기 때문
       setInit(true)
     });
   },[]);
 
+  const refreshUser = () => {
+    // console.log(authService.currentUser);
+    const user = authService.currentUser;
+    setUserObj({
+      displayName: user.displayName,
+      uid : user.uid,
+      photoURL : user.photoURL,
+      updateProfile : (args) => user.updateProfile(args),
+    });
+  }
+
   return (
     <>
-    {init ? <AppRouter isLoggedIn={isLoggedIn} userObj={userObj}/> : "Initializing..."}
+    {init ? <AppRouter isLoggedIn={isLoggedIn} userObj={userObj} refreshUser={refreshUser}/> : "Initializing..."}
     <footer>&copy; Nwitter {new Date().getFullYear()}</footer>
     </>
   );
