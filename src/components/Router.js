@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {HashRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
+import React from 'react';
+import {HashRouter as Router, Route, Switch} from 'react-router-dom';
 import Profile from 'routes/Profile';
 
 import Auth from '../routes/Auth';
