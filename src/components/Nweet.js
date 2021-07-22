@@ -10,7 +10,9 @@ const Nweet = ({nweetObj, isOwner}) =>{
         const ok = window.confirm("삭제하시겠습니까?");
         if(ok){
             await dbService.doc(`nweets/${nweetObj.id}`).delete();
-            await storageService.refFromURL(nweetObj.attachmentUrl).delete();
+            if(nweetObj.attachmentUrl){
+                await storageService.refFromURL(nweetObj.attachmentUrl).delete();
+            }
         }
     }
     //update

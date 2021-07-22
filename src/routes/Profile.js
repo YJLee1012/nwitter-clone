@@ -51,7 +51,10 @@ const Profile = ({userObj, refreshUser}) =>{
         let photoUrl="";
         if(newPhoto !== ""){
             //수정시 이전 프로필이미지 삭제
-            await storageService.refFromURL(userObj.photoURL).delete();
+            if(userObj.photoURL){
+                await storageService.refFromURL(userObj.photoURL).delete();
+            }
+
             //파일에 대한 reference 생성
             const newPhotoRef = storageService.ref().child(`profile/${uuidv4()}`);
             const response = await newPhotoRef.putString(newPhoto, "data_url");
@@ -77,7 +80,7 @@ const Profile = ({userObj, refreshUser}) =>{
 
     return(
         <>
-        <img src={userObj.photoURL} width='50px' height='50px' />
+        <img src={userObj.photoURL ? userObj.photoURL : "https://i.ibb.co/tqQpzmF/user.png"} width='50px' height='50px' />
         <form onSubmit={onProfileImageSubmit}>
             <input onChange={onProfileImageChange} type="file" accept="image/*" />
             <input type ="submit" value="프로필 사진 변경" />

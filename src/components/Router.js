@@ -23,7 +23,7 @@ const AppRouter = ({isLoggedIn, userObj, refreshUser}) => {
                 {/* <Redirect from ="*" to="/" /> */}
             </>:
             <Route exact path="/">
-                <Auth/>
+                <Auth />
             </Route>
             }
         </Switch>
