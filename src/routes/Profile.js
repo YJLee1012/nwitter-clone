@@ -79,22 +79,24 @@ const Profile = ({userObj, refreshUser}) =>{
     }
 
     return(
-        <>
-        <img src={userObj.photoURL ? userObj.photoURL : "https://i.ibb.co/tqQpzmF/user.png"} width='50px' height='50px' />
-        <form onSubmit={onProfileImageSubmit}>
-            <input onChange={onProfileImageChange} type="file" accept="image/*" />
-            <input type ="submit" value="프로필 사진 변경" />
-        </form>
-        <form onSubmit={onProfileNameSubmit}>
-            <input onChange={onProfileNameChange} type="text" placeholder="display name" value={newDisplayName} />
-            <input type="submit" value="닉네임 변경" />
-        </form>
-        <button onClick={onClickLogOut}>Sign Out</button>
-
-        {myNweets.map((myNweet)=>(
-            <Nweet key={myNweet.createdAt} nweetObj={myNweet} isOwner={myNweet.creatorId === userObj.uid}/>
-        ))}
-        </>
+        <div className="container">
+            <img src={userObj.photoURL ? userObj.photoURL : "https://i.ibb.co/tqQpzmF/user.png"} width='50px' height='50px' />
+            <form className="profileForm" onSubmit={onProfileImageSubmit}>
+                <input onChange={onProfileImageChange} type="file" accept="image/*" />
+                <input className="formBtn" style={{marginTop:10,}} type ="submit" value="프로필 사진 변경" />
+            </form>
+            <form className="profileForm" onSubmit={onProfileNameSubmit}>
+                <input onChange={onProfileNameChange} type="text" placeholder="display name" value={newDisplayName} />
+                <input className="formBtn" style={{marginTop:10,}} type="submit" value="닉네임 변경" />
+            </form>
+            {/* <button onClick={onClickLogOut}>Sign Out</button> */}
+            <span className="formBtn cancelBtn logOut" onClick={onClickLogOut}>
+                Sign Out
+            </span>
+            {myNweets.map((myNweet)=>(
+                <Nweet key={myNweet.createdAt} nweetObj={myNweet} isOwner={myNweet.creatorId === userObj.uid}/>
+            ))}
+        </div>
     )
 }
 

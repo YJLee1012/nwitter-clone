@@ -1,6 +1,9 @@
 import { dbService, storageService } from 'fbase';
 import React,{useState} from 'react';
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+
 const Nweet = ({nweetObj, isOwner}) =>{
     const [editing,setEditing] = useState(false);
     const [editNweet,setEditNweet] = useState(nweetObj.text);
@@ -29,23 +32,31 @@ const Nweet = ({nweetObj, isOwner}) =>{
         setEditNweet(e.target.value);
     }
     return(
-        <div>
+        <div className="nweet">
             {editing ? ( 
                 <>
-                <form onSubmit={onSubmit}>
+                <form className="container nweetEdit" onSubmit={onSubmit}>
                     <input onChange={onChange} type="text" placeholder="Edit your nweet" value={editNweet} required />
-                    <input type="submit" value="Update Nweet"/>
+                    <input className="formBtn" type="submit" value="Update Nweet"/>
                 </form>
-                <button onClick={toggleEditing}>Cancel</button>
+                <button className="formBtn cancelBtn" onClick={toggleEditing}>Cancel</button>
                 </>
             ):(
                 <>
                 <h4>{nweetObj.text}</h4>
-                {nweetObj.attachmentUrl && <img src={nweetObj.attachmentUrl} width="50px" height="50px"/>}
+                {nweetObj.attachmentUrl && <img src={nweetObj.attachmentUrl} />}
                 {/* isOwner true일때만 삭제, 수정 보이도록 한다. */}
                 { (isOwner) && (<>
-                <button onClick={onDeleteClick}>Delete Nweet</button>
-                <button onClick={toggleEditing}>Edit Nweet</button>
+                {/* <button onClick={onDeleteClick}>Delete Nweet</button>
+                <button onClick={toggleEditing}>Edit Nweet</button> */}
+                <div className="nweet__actions">
+                    <span onClick={onDeleteClick}>
+                        <FontAwesomeIcon icon={faTrash} />
+                    </span>
+                    <span onClick={toggleEditing}>
+                        <FontAwesomeIcon icon={faPencilAlt} />
+                    </span>
+                </div>
                 </>) }
                 </>
             )
