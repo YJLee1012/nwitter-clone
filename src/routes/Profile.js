@@ -4,6 +4,9 @@ import { useHistory } from 'react-router-dom';
 import Nweet from 'components/Nweet';
 import {v4 as uuidv4} from "uuid";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+
 
 const Profile = ({userObj, refreshUser}) =>{
     const history = useHistory();
@@ -82,7 +85,11 @@ const Profile = ({userObj, refreshUser}) =>{
         <div className="container">
             <img src={userObj.photoURL ? userObj.photoURL : "https://i.ibb.co/tqQpzmF/user.png"} width='50px' height='50px' />
             <form className="profileForm" onSubmit={onProfileImageSubmit}>
-                <input onChange={onProfileImageChange} type="file" accept="image/*" />
+                <label for="attach-file" className="factoryInput__label">
+                    <span>Edit Profile photos</span>
+                    <FontAwesomeIcon icon={faPlus} />
+                </label>
+                <input id="attach-file" style={{opacity: 0,}} onChange={onProfileImageChange} type="file" accept="image/*"/>
                 <input className="formBtn" style={{marginTop:10,}} type ="submit" value="프로필 사진 변경" />
             </form>
             <form className="profileForm" onSubmit={onProfileNameSubmit}>

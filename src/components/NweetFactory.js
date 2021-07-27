@@ -57,9 +57,7 @@ const NweetFactory = ({userObj}) => {
                 <span>Add photos</span>
                 <FontAwesomeIcon icon={faPlus} />
             </label>
-            <input id="attach-file" style={{
-                opacity: 0,
-                }} onChange={onFileChange} type="file" accept="image/*"/>
+            <input id="attach-file" style={{opacity: 0,}} onChange={onFileChange} type="file" accept="image/*"/>
             {attachment && 
                 <div className="factoryFrom__attachment">
                     <img src={attachment} style={{backgroundImage : attachment,}}/>
